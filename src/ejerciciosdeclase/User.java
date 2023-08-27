@@ -4,35 +4,46 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class User {
-    static ArrayList<String>usuario=new ArrayList<String>();
-    static Scanner sc= new Scanner(System.in);
-    static boolean salir=false;
-    public static void main(String[] args) {
-        System.out.println("Para iniciar ingrese 0");
-        int inicio= sc.nextInt();
-        if (inicio==0){
-            menu();
-        }else{
-            salir=true;
-            System.out.println("Va a salir del sistema");
-        }
-    }
+ static ArrayList<Persona> personas = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
 
-    public static void menu(){
-        do{
-            System.out.println("Eliga una opción \n 1.Agregar datos \n 2.Imprimir datos \n 3.Salir");
-            int opc= sc.nextInt();
-            switch (opc){
+    public static void main(String[] args) {
+        boolean continuar = true;
+
+        do {
+            System.out.println("Seleccione una opción: \n1. Agregar datos \n2. Imprimir datos \n3. Salir");
+            int opcion = sc.nextInt();
+            sc.nextLine(); // Consumir la nueva línea
+
+            switch (opcion) {
                 case 1:
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+
+                    System.out.print("Edad: ");
+                    int edad = sc.nextInt();
+                    sc.nextLine(); 
+
+                    System.out.print("Correo: ");
+                    String correo = sc.nextLine();
+
+                    personas.add(new Persona(nombre, edad, correo));
                     break;
                 case 2:
+                    System.out.println("Datos de personas:");
+                    for (Persona persona : personas) {
+                        System.out.println("Nombre: " + persona.getNombre() + ", Edad: " + , Integer.toString(edad) + ", Correo: " + persona.getCorreo());
+                    }
                     break;
                 case 3:
-                    salir=true;
+                    continuar = false;
                     break;
                 default:
-                    System.out.println("Opcion invalida");
+                    System.out.println("Opción no válida.");
+                    break;
             }
-        }while (salir!=true);
+        } while (continuar);
+
+        sc.close();
     }
 }
